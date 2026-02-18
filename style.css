@@ -238,15 +238,32 @@ h3 { color: #334155; font-weight: 500; margin-bottom: 18px; font-size: 20px; }
         line-height: 1.2;
     }
 
-    /* 4. Fix the Navigation Bar */
+    /* 4. Fix the Navigation Bar - Anti-Clutter Version */
     nav {
-        flex-direction: column; /* Stacks links vertically if they are too long */
-        padding: 10px;
+        flex-direction: column !important; /* Stacks name and links */
+        align-items: center !important;
+        text-align: center !important;
+        gap: 15px !important;
+        padding: 20px 10px !important;
     }
 
     .nav-links {
-        gap: 10px;
-        font-size: 0.9rem;
+        display: flex !important;
+        flex-wrap: wrap !important; /* Allows links to drop to a new line if needed */
+        justify-content: center !important;
+        gap: 12px !important; /* Spacing between "About", "Now", etc. */
+        margin: 10px 0 !important;
+    }
+
+    .nav-links a {
+        font-size: 0.95rem !important;
+        padding: 5px 8px !important; /* Makes them easier to tap */
+    }
+
+    /* Makes the "Contact Me" button fit nicely below the links */
+    .contact-btn {
+        width: fit-content !important;
+        padding: 10px 25px !important;
     }
 
     /* 5. Ensure images and cards don't exceed screen width */
