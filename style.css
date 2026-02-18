@@ -215,53 +215,68 @@ h3 { color: #334155; font-weight: 500; margin-bottom: 18px; font-size: 20px; }
 .card ul {
     color: #64748b !important;
 }
-/* --- MOBILE RESPONSIVENESS (Screens 768px and smaller) --- */
-/* --- UNIVERSAL MOBILE FIX --- */
+/* --- CONSOLIDATED MOBILE FIX --- */
 @media screen and (max-width: 768px) {
     
-    /* 1. Force every container to stay inside the phone width */
+    /* 1. Prevent the side-scrolling and "wobble" */
     html, body {
-        overflow-x: hidden !important; /* Prevents the side-scrolling you see now */
+        overflow-x: hidden !important;
         width: 100%;
+        position: relative;
     }
 
-    .container, section, .hero-section {
-        width: 100% !important;
-        padding: 15px !important;
-        margin: 0 !important;
-        box-sizing: border-box;
-    }
-
-    /* 2. Force ALL grids and flexboxes to stack vertically */
-    /* This targets the projects and info cards appearing side-by-side in your screenshots */
-    div[style*="display: flex"], 
-    .projects-grid, 
-    .skills-container,
-    .grid,
-    header,
-    nav {
+    /* 2. THE HEADER FIX: Stacks name, links, and button vertically */
+    header, nav {
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
-        grid-template-columns: 1fr !important; /* Force 1 column if it's a grid */
+        text-align: center !important;
+        height: auto !important;
+        padding: 15px 10px !important;
+    }
+
+    .nav-links {
+        display: flex !important;
+        flex-wrap: wrap !important; /* Forces links to a new line if they don't fit */
+        justify-content: center !important;
+        gap: 12px !important;
+        margin: 15px 0 !important;
         width: 100% !important;
     }
 
-    /* 3. Fix the cards specifically so they take full width */
-    .card, .project-card, .skill-card, div[class*="card"] {
-        width: 95% !important; /* Occupies almost full width of the phone */
+    .nav-links a {
+        font-size: 0.9rem !important;
+        padding: 5px 8px !important;
+    }
+
+    .contact-btn {
+        width: 80% !important; /* Nice wide button for tapping */
+        margin-top: 5px !important;
+    }
+
+    /* 3. THE CARD FIX: Forces everything into a single column */
+    .projects-grid, 
+    .skills-container, 
+    .info-cards,
+    div[style*="display: flex"] {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        width: 100% !important;
+    }
+
+    .card, .project-card, .skill-card {
+        width: 95% !important;
+        max-width: 95% !important;
         margin-bottom: 20px !important;
-        min-width: unset !important;
     }
 
-    /* 4. Fix the Navbar clutter */
-    .nav-links {
-        flex-wrap: wrap !important;
-        justify-content: center !important;
-        gap: 10px !important;
-    }
-
-    /* 5. Scale down the large text */
+    /* 4. Text scaling for small screens */
     h1 { font-size: 1.6rem !important; }
     h2 { font-size: 1.4rem !important; }
+    
+    .hero-section {
+        padding: 40px 15px !important;
+        text-align: center;
+    }
 }
