@@ -216,59 +216,52 @@ h3 { color: #334155; font-weight: 500; margin-bottom: 18px; font-size: 20px; }
     color: #64748b !important;
 }
 /* --- MOBILE RESPONSIVENESS (Screens 768px and smaller) --- */
+/* --- UNIVERSAL MOBILE FIX --- */
 @media screen and (max-width: 768px) {
     
-    /* 1. Reset container widths to fit the phone screen */
-    .container, section {
+    /* 1. Force every container to stay inside the phone width */
+    html, body {
+        overflow-x: hidden !important; /* Prevents the side-scrolling you see now */
+        width: 100%;
+    }
+
+    .container, section, .hero-section {
         width: 100% !important;
-        padding: 20px !important;
+        padding: 15px !important;
         margin: 0 !important;
         box-sizing: border-box;
     }
 
-    /* 2. Stack the Project and Skill cards vertically */
-    .projects-grid, .skills-container {
-        grid-template-columns: 1fr !important; /* Forces 1 column instead of 3 */
-        gap: 15px !important;
-    }
-
-    /* 3. Adjust the Hero section so text doesn't overflow */
-    .hero-section h1 {
-        font-size: 1.8rem !important; /* Shrinks the main title slightly */
-        line-height: 1.2;
-    }
-
-    /* 4. Fix the Navigation Bar - Anti-Clutter Version */
+    /* 2. Force ALL grids and flexboxes to stack vertically */
+    /* This targets the projects and info cards appearing side-by-side in your screenshots */
+    div[style*="display: flex"], 
+    .projects-grid, 
+    .skills-container,
+    .grid,
+    header,
     nav {
-        flex-direction: column !important; /* Stacks name and links */
-        align-items: center !important;
-        text-align: center !important;
-        gap: 15px !important;
-        padding: 20px 10px !important;
-    }
-
-    .nav-links {
         display: flex !important;
-        flex-wrap: wrap !important; /* Allows links to drop to a new line if needed */
+        flex-direction: column !important;
+        align-items: center !important;
+        grid-template-columns: 1fr !important; /* Force 1 column if it's a grid */
+        width: 100% !important;
+    }
+
+    /* 3. Fix the cards specifically so they take full width */
+    .card, .project-card, .skill-card, div[class*="card"] {
+        width: 95% !important; /* Occupies almost full width of the phone */
+        margin-bottom: 20px !important;
+        min-width: unset !important;
+    }
+
+    /* 4. Fix the Navbar clutter */
+    .nav-links {
+        flex-wrap: wrap !important;
         justify-content: center !important;
-        gap: 12px !important; /* Spacing between "About", "Now", etc. */
-        margin: 10px 0 !important;
+        gap: 10px !important;
     }
 
-    .nav-links a {
-        font-size: 0.95rem !important;
-        padding: 5px 8px !important; /* Makes them easier to tap */
-    }
-
-    /* Makes the "Contact Me" button fit nicely below the links */
-    .contact-btn {
-        width: fit-content !important;
-        padding: 10px 25px !important;
-    }
-
-    /* 5. Ensure images and cards don't exceed screen width */
-    img, .card {
-        max-width: 100% !important;
-        height: auto;
-    }
+    /* 5. Scale down the large text */
+    h1 { font-size: 1.6rem !important; }
+    h2 { font-size: 1.4rem !important; }
 }
