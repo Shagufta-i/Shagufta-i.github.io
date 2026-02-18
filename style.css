@@ -201,8 +201,6 @@ h3 { color: #334155; font-weight: 500; margin-bottom: 18px; font-size: 20px; }
 }
 
 .grid-3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 32px;            /* Increased gap for a cleaner look */
 }
 
@@ -215,68 +213,100 @@ h3 { color: #334155; font-weight: 500; margin-bottom: 18px; font-size: 20px; }
 .card ul {
     color: #64748b !important;
 }
-/* --- CONSOLIDATED MOBILE FIX --- */
-@media screen and (max-width: 768px) {
-    
-    /* 1. Prevent the side-scrolling and "wobble" */
-    html, body {
-        overflow-x: hidden !important;
+/* --- Mobile Layout (tablets & phones) --- */
+@media (max-width: 768px) {
+
+    /* Keep the header fixed at the top on mobile */
+    .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+    }
+
+    /* Add space so content doesn't hide behind the fixed header */
+    body {
+        padding-top: 90px;
+    }
+
+    /* Prevent horizontal scrolling on small screens */
+    html,
+    body {
+        overflow-x: hidden;
         width: 100%;
-        position: relative;
     }
 
-    /* 2. THE HEADER FIX: Stacks name, links, and button vertically */
-    header, nav {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        text-align: center !important;
-        height: auto !important;
-        padding: 15px 10px !important;
+    /* Tighter horizontal padding */
+    .container {
+        padding: 0 20px;
     }
 
-    .nav-links {
-        display: flex !important;
-        flex-wrap: wrap !important; /* Forces links to a new line if they don't fit */
-        justify-content: center !important;
-        gap: 12px !important;
-        margin: 15px 0 !important;
-        width: 100% !important;
+    /* Stack logo and nav vertically */
+    .nav-inner {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        height: auto;
     }
 
-    .nav-links a {
-        font-size: 0.9rem !important;
-        padding: 5px 8px !important;
+    .nav-inner nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
-    .contact-btn {
-        width: 80% !important; /* Nice wide button for tapping */
-        margin-top: 5px !important;
+    .nav a {
+        margin: 4px 8px;
+        font-size: 13px;
     }
 
-    /* 3. THE CARD FIX: Forces everything into a single column */
-    .projects-grid, 
-    .skills-container, 
-    .info-cards,
-    div[style*="display: flex"] {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        width: 100% !important;
+    /* Hero tweaks */
+    .hero {
+        padding: 50px 0;
     }
 
-    .card, .project-card, .skill-card {
-        width: 95% !important;
-        max-width: 95% !important;
-        margin-bottom: 20px !important;
+    .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
     }
 
-    /* 4. Text scaling for small screens */
-    h1 { font-size: 1.6rem !important; }
-    h2 { font-size: 1.4rem !important; }
-    
-    .hero-section {
-        padding: 40px 15px !important;
+    .hero-actions .btn-primary,
+    .hero-actions .btn-outline {
+        width: 100%;
         text-align: center;
+    }
+
+    .avatar-ring img {
+        width: 200px;
+        height: 200px;
+    }
+
+    /* Cards / grids take full width */
+    .grid-3 {
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 20px;
+        column-gap: 0;
+    }
+
+    .card {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    /* Contact section stacks nicely */
+    .contact-grid {
+        display: block;
+    }
+
+    /* Type scaling */
+    h1 {
+        font-size: 28px;
+    }
+
+    h2.section-title {
+        font-size: 24px;
     }
 }
