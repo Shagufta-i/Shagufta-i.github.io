@@ -215,3 +215,43 @@ h3 { color: #334155; font-weight: 500; margin-bottom: 18px; font-size: 20px; }
 .card ul {
     color: #64748b !important;
 }
+/* --- MOBILE RESPONSIVENESS (Screens 768px and smaller) --- */
+@media screen and (max-width: 768px) {
+    
+    /* 1. Reset container widths to fit the phone screen */
+    .container, section {
+        width: 100% !important;
+        padding: 20px !important;
+        margin: 0 !important;
+        box-sizing: border-box;
+    }
+
+    /* 2. Stack the Project and Skill cards vertically */
+    .projects-grid, .skills-container {
+        grid-template-columns: 1fr !important; /* Forces 1 column instead of 3 */
+        gap: 15px !important;
+    }
+
+    /* 3. Adjust the Hero section so text doesn't overflow */
+    .hero-section h1 {
+        font-size: 1.8rem !important; /* Shrinks the main title slightly */
+        line-height: 1.2;
+    }
+
+    /* 4. Fix the Navigation Bar */
+    nav {
+        flex-direction: column; /* Stacks links vertically if they are too long */
+        padding: 10px;
+    }
+
+    .nav-links {
+        gap: 10px;
+        font-size: 0.9rem;
+    }
+
+    /* 5. Ensure images and cards don't exceed screen width */
+    img, .card {
+        max-width: 100% !important;
+        height: auto;
+    }
+}
