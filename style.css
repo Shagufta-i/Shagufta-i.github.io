@@ -44,13 +44,15 @@ section[id] {
 
 .theme-toggle {
     margin-left: 16px;
-    padding: 6px 12px;
+    width: 40px;
+    height: 40px;
     border-radius: 999px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--border);
     background: rgba(255, 255, 255, 0.8);
     color: #334155;
-    font-size: 12px;
-    font-weight: 500;
+    display: grid;
+    place-items: center;
+    padding: 0;
     cursor: pointer;
     transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
 }
@@ -59,6 +61,30 @@ section[id] {
     background: #e0f2fe;
     border-color: #bae6fd;
     transform: translateY(-1px);
+}
+
+.theme-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+}
+
+.theme-icon-sun { display: none; }
+
+html.theme-dark .theme-icon-moon { display: none; }
+html.theme-dark .theme-icon-sun { display: inline-flex; }
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 .nav-inner { 
     display: flex; 
@@ -77,12 +103,11 @@ section[id] {
 }
 .nav a:hover { color: #38bdf8; }
 
-.nav a.active {
-    color: #0ea5e9;
+.nav a:not(.btn-primary) {
     position: relative;
 }
 
-.nav a.active::after {
+.nav a:not(.btn-primary)::after {
     content: "";
     position: absolute;
     left: 0;
@@ -91,6 +116,25 @@ section[id] {
     height: 2px;
     border-radius: 999px;
     background: #0ea5e9;
+    opacity: 0;
+    transform: scaleX(0.2);
+    transform-origin: left;
+    transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.nav a:not(.btn-primary):hover::after,
+.nav a:not(.btn-primary):focus-visible::after {
+    opacity: 0.6;
+    transform: scaleX(1);
+}
+
+.nav a.active {
+    color: #0ea5e9;
+}
+
+.nav a.active::after {
+    opacity: 1;
+    transform: scaleX(1);
 }
 
 /* --- Hero Section --- */
@@ -181,6 +225,36 @@ h3 { color: #334155; font-weight: 500; margin-bottom: 18px; font-size: 20px; }
     height: 100%;
     display: flex;
     flex-direction: column;
+}
+
+.card h4 {
+    margin-bottom: 12px;
+}
+
+.card p {
+    margin-top: 12px;
+}
+
+/* Cleaner paragraph flow (no forced hyphenation) */
+.section-sub,
+.section-subtitle,
+.card p,
+.timeline-card p {
+    text-align: left;
+    hyphens: none;
+    text-wrap: pretty;
+}
+
+.tags {
+    margin: 12px 0;
+}
+
+.timeline-card h4 {
+    margin-bottom: 6px;
+}
+
+.timeline-card .muted {
+    margin-bottom: 0;
 }
 
 .card:hover { 
@@ -399,22 +473,35 @@ button:focus-visible {
 
     /* Stack logo and nav vertically */
     .nav-inner {
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+            "logo toggle"
+            "nav nav";
         align-items: center;
-        justify-content: center;
-        gap: 8px;
+        gap: 10px;
         height: auto;
+        padding: 10px 0;
     }
+
+    .nav-inner .logo { grid-area: logo; justify-self: start; }
+    .nav-inner nav { grid-area: nav; }
+    .nav-inner .theme-toggle { grid-area: toggle; justify-self: end; }
 
     .nav-inner nav {
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
+        justify-content: flex-start;
+        gap: 8px;
     }
 
     .nav a {
-        margin: 4px 8px;
+        margin: 0;
         font-size: 13px;
+    }
+
+    .theme-toggle {
+        margin-left: 0;
     }
 
     /* Hero tweaks */
