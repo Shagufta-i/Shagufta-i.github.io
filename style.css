@@ -90,11 +90,17 @@ html.theme-dark .theme-icon-sun { display: inline-flex; }
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
-    height: 70px; 
+    min-height: 80px;
+    padding: 16px 0 14px;
 }
 .logo { font-weight: 800; color: #0f172a; letter-spacing: -0.5px; }
+.nav-inner nav {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
 .nav a { 
-    margin-left: 24px; 
     text-decoration: none; 
     color: #475569; 
     font-size: 14px; 
@@ -102,6 +108,11 @@ html.theme-dark .theme-icon-sun { display: inline-flex; }
     transition: color 0.2s ease;
 }
 .nav a:hover { color: #38bdf8; }
+
+/* Give the CTA slightly more breathing room */
+.nav a.btn-primary {
+    margin-left: 18px;
+}
 
 .nav a:not(.btn-primary) {
     position: relative;
@@ -481,7 +492,7 @@ button:focus-visible {
         align-items: center;
         gap: 10px;
         height: auto;
-        padding: 10px 0;
+        padding: 14px 0 10px;
     }
 
     .nav-inner .logo { grid-area: logo; justify-self: start; }
@@ -490,14 +501,34 @@ button:focus-visible {
 
     .nav-inner nav {
         display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-start;
-        gap: 8px;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 10px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 2px;
+    }
+
+    .nav-inner nav::-webkit-scrollbar {
+        display: none;
     }
 
     .nav a {
+        white-space: nowrap;
         margin: 0;
         font-size: 13px;
+        line-height: 1.2;
+    }
+
+    .nav a.btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 14px;
+        border-radius: 12px;
+        line-height: 1.1;
+        flex: 0 0 auto;
     }
 
     .theme-toggle {
